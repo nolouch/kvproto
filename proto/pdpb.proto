@@ -64,6 +64,8 @@ service PD {
     rpc GetGCSafePoint(GetGCSafePointRequest) returns (GetGCSafePointResponse) {}
 
     rpc UpdateGCSafePoint(UpdateGCSafePointRequest) returns (UpdateGCSafePointResponse) {}
+
+    rpc UpdateRegion(UpdateRegionRequest) returns (UpdateRegionResponse) {}
 }
 
 message RequestHeader {
@@ -460,3 +462,12 @@ message UpdateGCSafePointResponse {
     uint64 new_safe_point = 2;
 }
 
+message UpdateRegionRequest{
+    RequestHeader header = 1;
+    bytes data = 2 [(gogoproto.customtype) = "github.com/pingcap/tipb/sharedbytes.SharedBytes", (gogoproto.nullable) = false];
+}
+
+
+message UpdateRegionResponse{
+    ResponseHeader header = 1;
+}
