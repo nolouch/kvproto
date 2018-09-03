@@ -471,3 +471,8 @@ message UpdateRegionRequest{
 message UpdateRegionResponse{
     ResponseHeader header = 1;
 }
+
+message MetaRegions{
+    uint32 count = 1;
+    repeated metapb.Region regions = 2;
+}
