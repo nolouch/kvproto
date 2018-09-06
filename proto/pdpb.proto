@@ -65,7 +65,7 @@ service PD {
 
     rpc UpdateGCSafePoint(UpdateGCSafePointRequest) returns (UpdateGCSafePointResponse) {}
 
-    rpc UpdateRegion(UpdateRegionRequest) returns (UpdateRegionResponse) {}
+    rpc SyncRegions(stream SyncRegionRequest) returns (stream SyncRegionResponse) {}
 }
 
 message RequestHeader {
@@ -462,14 +462,15 @@ message UpdateGCSafePointResponse {
     uint64 new_safe_point = 2;
 }
 
-message UpdateRegionRequest{
-    RequestHeader header = 1;
-    bytes data = 2 [(gogoproto.customtype) = "github.com/pingcap/tipb/sharedbytes.SharedBytes", (gogoproto.nullable) = false];
+message SyncRegionRequest{
+    ResponseHeader header = 1;
+    Member member = 2;
+    int32 tp = 3;
 }
 
-
-message UpdateRegionResponse{
-    ResponseHeader header = 1;
+message SyncRegionResponse{
+    RequestHeader header = 1;
+    bytes data = 2 [(gogoproto.customtype) = "github.com/pingcap/tipb/sharedbytes.SharedBytes", (gogoproto.nullable) = false];
 }
 
 message MetaRegions{
