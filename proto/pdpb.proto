@@ -463,13 +463,13 @@ message UpdateGCSafePointResponse {
 }
 
 message SyncRegionRequest{
-    ResponseHeader header = 1;
+    RequestHeader header = 1;
     Member member = 2;
     int32 tp = 3;
 }
 
 message SyncRegionResponse{
-    RequestHeader header = 1;
+    ResponseHeader header = 1;
     bytes data = 2 [(gogoproto.customtype) = "github.com/pingcap/tipb/sharedbytes.SharedBytes", (gogoproto.nullable) = false];
 }
 
